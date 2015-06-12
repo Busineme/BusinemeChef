@@ -1,0 +1,10 @@
+name "busine-me"
+maintainer "Lucas Severo"
+maintainer_email "lucassalves65@gmail.com"
+license "GPL v3"
+description "Setup development environment for Busine-me Web"
+version "0.0.1"
+
+# depends "python"
+depends "git"
+# depends "mariadb"
