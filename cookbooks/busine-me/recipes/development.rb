@@ -47,19 +47,7 @@ execute 'cp configuration/api.py.template configuration/api.py' do
   cwd "#{REPOWEB_DIR}"
 end
 
-
-# # Configure MariaDB
-# include_recipe "mariadb::server"
-# include_recipe "mariadb::client"
-
-# package "libmysqlclient-dev"
-
-# execute "create_database" do
-#   command "mysqladmin create busine-me -u root"
-#   not_if "mysql -u root -e 'use busine-me;'"
-# end
-
-# Configure MariaDB
+# Configure postgresql
 include_recipe "postgresql::server"
 
 cookbook_file "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_hba.conf" do
@@ -74,6 +62,15 @@ end
 execute "create database" do
     command "createdb -U postgres -T template0 -O postgres #{node[:dbname]} -E UTF8 --locale=en_US.UTF-8"
     not_if "psql -U postgres --list | grep #{node[:dbname]}"
+end
+
+
+execute 'python manage.py makemigrations' do
+  cwd "#{REPOWEB_DIR}"
+end
+
+execute 'python manage.py migrate' do
+  cwd "#{REPOWEB_DIR}"
 end
 
 
