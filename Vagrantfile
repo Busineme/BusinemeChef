@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     chef.json  = {
       :user => "vagrant",
       :servername => "example.example.com",
-      :dbname => "example",
+      :dbname => "busine-me",
       :staticfiles => "/opt/example/apps/example/static/",
       :postgresql => {
           :password => {

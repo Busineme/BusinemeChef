@@ -22,6 +22,7 @@ package "python-libxslt1"
 package "python-lxml"
 package "python-setuptools"
 package "python-Levenshtein"
+package "python-psycopg2"
 
 include_recipe 'git'
 
