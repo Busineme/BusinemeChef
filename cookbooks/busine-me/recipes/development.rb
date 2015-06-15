@@ -74,9 +74,14 @@ execute 'python manage.py migrate' do
 end
 
 
+
 git "#{REPOAPI_DIR}" do
   repository "https://github.com/Busineme/BusinemeAPI.git"
   action :sync
+end
+
+execute 'pip install -r requirements.txt' do
+  cwd "#{REPOAPI_DIR}"
 end
 
 execute 'cp configuration/databases.py.template configuration/databases.py' do
@@ -87,3 +92,10 @@ execute 'cp configuration/security.py.template configuration/security.py' do
   cwd "#{REPOAPI_DIR}"
 end
 
+execute 'python manage.py makemigrations' do
+  cwd "#{REPOAPI_DIR}"
+end
+
+execute 'python manage.py migrate' do
+  cwd "#{REPOAPI_DIR}"
+end
