@@ -3,6 +3,7 @@ HOME = "/home/vagrant"
 SHARED_DIR = "/vagrant"
 REPOWEB_DIR = "#{SHARED_DIR}/repo/busine-me"
 REPOAPI_DIR = "#{SHARED_DIR}/repo/busine-meAPI"
+FILES_DIR = "#{SHARED_DIR}/files"
 
 package "vim"
 
@@ -35,13 +36,22 @@ execute 'pip install -r requirements.txt' do
   cwd "#{REPOWEB_DIR}"
 end
 
-execute 'cp configuration/databases.py.template configuration/databases.py' do
-  cwd "#{REPOWEB_DIR}"
+# execute 'cp configuration/databases.py.template configuration/databases.py' do
+#   cwd "#{REPOWEB_DIR}"
+# end
+
+# execute 'cp configuration/security.py.template configuration/security.py' do
+#   cwd "#{REPOWEB_DIR}"
+# end
+
+execute 'cp databases.py ../repo/busine-me/configuration/databases.py' do
+  cwd "#{FILES_DIR}"
 end
 
-execute 'cp configuration/security.py.template configuration/security.py' do
-  cwd "#{REPOWEB_DIR}"
+execute 'cp security.py ../repo/busine-me/configuration/security.py' do
+  cwd "#{FILES_DIR}"
 end
+
 
 execute 'cp configuration/api.py.template configuration/api.py' do
   cwd "#{REPOWEB_DIR}"
