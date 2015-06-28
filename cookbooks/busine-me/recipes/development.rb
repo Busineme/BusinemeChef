@@ -36,21 +36,21 @@ execute 'pip install -r requirements.txt' do
   cwd "#{REPOWEB_DIR}"
 end
 
-# execute 'cp configuration/databases.py.template configuration/databases.py' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-# execute 'cp configuration/security.py.template configuration/security.py' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-execute 'cp databases.py ../repo/busine-me/configuration/databases.py' do
-  cwd "#{FILES_DIR}"
+execute 'cp configuration/databases.py.template configuration/databases.py' do
+  cwd "#{REPOWEB_DIR}"
 end
 
-execute 'cp security.py ../repo/busine-me/configuration/security.py' do
-  cwd "#{FILES_DIR}"
+execute 'cp configuration/security.py.template configuration/security.py' do
+  cwd "#{REPOWEB_DIR}"
 end
+
+# execute 'cp databases.py ../repo/busine-me/configuration/databases.py' do
+#   cwd "#{FILES_DIR}"
+# end
+
+# execute 'cp security.py ../repo/busine-me/configuration/security.py' do
+#   cwd "#{FILES_DIR}"
+# end
 
 
 execute 'cp configuration/api.py.template configuration/api.py' do
@@ -107,5 +107,9 @@ execute 'python manage.py makemigrations' do
 end
 
 execute 'python manage.py migrate' do
+  cwd "#{REPOAPI_DIR}"
+end
+
+execute 'python manage.py import_data' do
   cwd "#{REPOAPI_DIR}"
 end
