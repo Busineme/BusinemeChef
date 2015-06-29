@@ -1,0 +1,5 @@
+HOME: /home/vagrant
+SHARED_DIR: /vagrant
+REPOWEB_DIR: /vagrant/repo/busine-me
+REPOAPI_DIR: /vagrant/repo/busine-meAPI
+FILES_DIR: /vagrant/files

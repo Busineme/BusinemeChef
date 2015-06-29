@@ -1,2 +1,5 @@
 aws.cfg
 BusinemeWeb.pem
+ssh_config
+tmp/
+.vagrant/

@@ -1,3 +1,7 @@
-host1.mycompany.com:
+api:
+  run_list:
+    - recipe[basics]
+
+web:
   run_list:
     - recipe[basics]
