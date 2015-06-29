@@ -1,4 +1,4 @@
-name "busine-me"
+name "busineme"
 maintainer "Lucas Severo"
 maintainer_email "lucassalves65@gmail.com"
 license "GPL v3"
@@ -6,5 +6,5 @@ description "Setup development environment for Busine-me Web"
 version "0.0.1"
 
 # depends "python"
-depends "git"
-depends "postgresql"
+# depends "git"
+# depends "postgresql"

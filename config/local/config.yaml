@@ -1,5 +1,8 @@
 HOME: /home/vagrant
 SHARED_DIR: /vagrant
+REPOWEB_DIR_LOCAL: /vagrant/repo/busine-me
+REPOAPI_DIR_LOCAL: /vagrant/repo/busine-meAPI
 REPOWEB_DIR: /vagrant/repo/busine-me
 REPOAPI_DIR: /vagrant/repo/busine-meAPI
 FILES_DIR: /vagrant/files
+REPOSITORY: https://github.com/Busineme/BusinemeWeb
