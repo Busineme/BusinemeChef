@@ -6,5 +6,5 @@ api:
 web:
   run_list:
     - recipe[basics]
-    - recipe[busineme::postgresql]
+    # - recipe[busineme::postgresql]
     - recipe[busineme::web]

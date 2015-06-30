@@ -19,5 +19,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.define 'web' do |web|
     web.vm.network 'private_network', ip: ips['web'] if ips
+    web.vm.network "forwarded_port", guest: 8000, host: 8001
   end
 end
