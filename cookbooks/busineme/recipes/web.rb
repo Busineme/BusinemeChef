@@ -1,5 +1,6 @@
 # Variables
 $BUSINEME_ENV = ENV.fetch('BUSINEME_ENV', 'local')
+execute "apt-get update"
 package "vim"
 
 package "python2.7" 

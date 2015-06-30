@@ -9,7 +9,7 @@ end
 
 
 execute 'createuser:busineme' do
-	command "psql -c \"create user #{node['config']['DATABASE']['USER']} with password '#{node['config']['DATABASE']['PASSWORD']}';\""
+	command "createuser busineme"
 	user 'postgres'
 	not_if do
 		`sudo -u postgres -i psql -c "select * from pg_user where usename = 'busineme';" | grep -c busineme`
@@ -17,7 +17,7 @@ execute 'createuser:busineme' do
 end
 
 execute 'createdb:busineme' do
-	command 'createdb —owner=busineme busineme'
+	command 'createdb busineme —owner=busineme'
 	user 'postgres'
 	not_if do
 		`sudo -u postgres -i psql -c "select * from pg_database where datname = 'busineme';" | grep -c busineme`
