@@ -65,3 +65,4 @@ end
 execute 'python manage.py migrate' do
   cwd "#{REPODIR}"
 end
+

@@ -1,6 +1,7 @@
 api:
   run_list:
     - recipe[basics]
+    - recipe[busineme::api]
     # - recipe[busineme::api]
 
 web:
