@@ -1,9 +1,14 @@
-HOME: /home/vagrant
-SHARED_DIR: /vagrant
-REPOWEB_DIR_LOCAL: /vagrant/repo/busine-me
-REPOAPI_DIR_LOCAL: /vagrant/repo/busine-meAPI
-REPOWEB_DIR: /vagrant/repo/busine-me
-REPOAPI_DIR: /vagrant/repo/busine-meAPI
-FILES_DIR: /vagrant/files
-REPOSITORY: https://github.com/Busineme/BusinemeWeb.git
-PSQL_PASSWORD: 1234
+DIRECTORIES:
+    - API_REPO_LOCAL: /vagrant/repo/busineme-api
+    - API_REPO_PROD: /opt/busineme-api
+    - WEB_REPO_LOCAL: /vagrant/repo/busineme-web
+    - WEB_REPO_PROD: /opt/busineme-web
+APPLICATION:
+    - WEB_REPOSITORY: https://github.com/Busineme/BusinemeWeb.git
+    - API_REPOSITORY: https://github.com/Busineme/BusinemeAPI.git
+    - SECRET_KEY: secret-key
+    - DEBUG: True
+DATABASE:
+    - NAME: busineme
+    - USER: busineme
+    - PASSWORD: 1234
