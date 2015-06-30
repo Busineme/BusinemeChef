@@ -57,59 +57,11 @@ template "#{REPODIR}/configuration/api.py" do
   source "api.py.erb"
 end
 
-# # Configure postgresql
-# include_recipe "postgresql::server"
 
-# cookbook_file "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_hba.conf" do
-#     source "pg_hba.conf"
-#     owner "postgres"
-# end
+execute 'python manage.py makemigrations' do
+  cwd "#{REPODIR}"
+end
 
-# execute "restart postgres" do
-#     command "sudo /etc/init.d/postgresql restart"
-# end
-
-# execute "create database" do
-#     command "createdb -U postgres -T template0 -O postgres #{node[:dbname]} -E UTF8 --locale=en_US.UTF-8"
-#     not_if "psql -U postgres --list | grep #{node[:dbname]}"
-# end
-
-
-# execute 'python manage.py makemigrations' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-# execute 'python manage.py migrate' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-
-
-# git "#{REPOAPI_DIR}" do
-#   repository "https://github.com/Busineme/BusinemeAPI.git"
-#   action :sync
-# end
-
-# execute 'pip install -r requirements.txt' do
-#   cwd "#{REPOAPI_DIR}"
-# end
-
-# execute 'cp configuration/databases.py.template configuration/databases.py' do
-#   cwd "#{REPOAPI_DIR}"
-# end
-
-# execute 'cp configuration/security.py.template configuration/security.py' do
-#   cwd "#{REPOAPI_DIR}"
-# end
-
-# execute 'python manage.py makemigrations' do
-#   cwd "#{REPOAPI_DIR}"
-# end
-
-# execute 'python manage.py migrate' do
-#   cwd "#{REPOAPI_DIR}"
-# end
-
-# execute 'python manage.py import_data' do
-#   cwd "#{REPOAPI_DIR}"
-# end
+execute 'python manage.py migrate' do
+  cwd "#{REPODIR}"
+end
