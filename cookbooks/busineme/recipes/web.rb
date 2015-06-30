@@ -25,15 +25,17 @@ include_recipe "git"
 
 if ['local'].include?($BUSINEME_ENV)
   REPODIR = node['config']['DIRECTORIES']['WEB_REPO_LOCAL']
+  DEBUG = 'True'
   directory "#{REPODIR}" do
     recursive true
   end
 else
+  DEBUG = 'False'
   REPODIR = node['config']['DIRECTORIES']['WEB_REPO_PROD']
 end
 
 git "#{REPODIR}" do
-  repository node['config']['APLICAITON']['WEB_REPOSITORY']
+  repository node['config']['APPLICATION']['WEB_REPOSITORY']
   action :sync
 end
 
@@ -48,28 +50,12 @@ end
 
 template "#{REPODIR}/configuration/security.py" do
   source "security.py.erb"
+  variables({:DEBUG => DEBUG})
 end
 
-# execute 'cp configuration/databases.py.template configuration/databases.py' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-# execute 'cp configuration/security.py.template configuration/security.py' do
-#   cwd "#{REPOWEB_DIR}"
-# end
-
-# # execute 'cp databases.py ../repo/busine-me/configuration/databases.py' do
-# #   cwd "#{FILES_DIR}"
-# # end
-
-# # execute 'cp security.py ../repo/busine-me/configuration/security.py' do
-# #   cwd "#{FILES_DIR}"
-# # end
-
-
-# execute 'cp configuration/api.py.template configuration/api.py' do
-#   cwd "#{REPOWEB_DIR}"
-# end
+template "#{REPODIR}/configuration/api.py" do
+  source "api.py.erb"
+end
 
 # # Configure postgresql
 # include_recipe "postgresql::server"
