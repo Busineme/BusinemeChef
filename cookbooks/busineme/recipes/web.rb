@@ -8,6 +8,7 @@ package "python-dev"
 package "postgresql-contrib"
 package "libpq-dev" 
 package "postgresql"
+package "git"
 
 package "libxml2"
 package "libxslt1.1"
@@ -20,25 +21,34 @@ package "python-setuptools"
 package "python-Levenshtein"
 package "python-psycopg2"
 
+include_recipe "git"
 
-# git "#{REPOWEB_DIR}" do
-#   repository "https://github.com/aldarionsevero/BusinemeWeb"
-#   action :sync
-# end
-
-
-execute "git clone #{node['config']['REPOSITORY']}" do
-  if ['local'].include?($BUSINEME_ENV)
-    cwd "#{node['config']['REPOWEB_DIR_LOCAL']}"
-  else 
-    cwd "#{node['config']['REPOWEB_DIR']}"
+if ['local'].include?($BUSINEME_ENV)
+  REPODIR = node['config']['DIRECTORIES']['WEB_REPO_LOCAL']
+  directory "#{REPODIR}" do
+    recursive true
   end
-  not_if "git status"
+else
+  REPODIR = node['config']['DIRECTORIES']['WEB_REPO_PROD']
 end
 
-# execute 'pip install -r requirements.txt' do
-#   cwd "#{REPOWEB_DIR}"
-# end
+git "#{REPODIR}" do
+  repository node['config']['APLICAITON']['WEB_REPOSITORY']
+  action :sync
+end
+
+
+execute 'pip install -r requirements.txt' do
+  cwd "#{REPODIR}"
+end
+
+template "#{REPODIR}/configuration/databases.py" do
+  source "databases.py.erb"
+end
+
+template "#{REPODIR}/configuration/security.py" do
+  source "security.py.erb"
+end
 
 # execute 'cp configuration/databases.py.template configuration/databases.py' do
 #   cwd "#{REPOWEB_DIR}"

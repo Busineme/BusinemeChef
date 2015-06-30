@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+
+# Security configurations
+
+SECRET_KEY = '<%=node['config']['APLICATION']['SECRET_KEY']%>'
+LOGIN_URL = '/login/'
+DEBUG = '<%=node['config']['APLICATION']['DEBUG']%>'
+TEMPLATE_DEBUG = '<%=node['config']['APLICATION']['DEBUG']%>'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']

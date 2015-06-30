@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+# Database configuration
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '<%= node['config']['DATABASE']['NAME']%>',
+        'USER': '<%= node['config']['DATABASE']['USER']%>',
+        'PASSWORD': '<%= node['config']['DATABASE']['PASSWORD']%>',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}

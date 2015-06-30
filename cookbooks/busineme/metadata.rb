@@ -6,5 +6,5 @@ description "Setup development environment for Busine-me Web"
 version "0.0.1"
 
 # depends "python"
-# depends "git"
+depends "git"
 # depends "postgresql"
