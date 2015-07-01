@@ -8,10 +8,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'busineme',
-        'USER': 'busineme',
-        'PASSWORD': '<%= node['config']['PSQL_PASSWORD']%>',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': '<%= node['config']['DATABASE']['NAME']%>',
+        'USER': '<%= node['config']['DATABASE']['USER']%>',
+        'PASSWORD': '<%= node['config']['DATABASE']['PASSWORD']%>',
     }
 }
