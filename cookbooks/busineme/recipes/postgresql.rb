@@ -1,6 +1,15 @@
 package "postgresql"
 
-template "/etc/postgresql/9.3/main/pg_hba.conf" do
+if ['local'].include?($BUSINEME_ENV)
+  DEBUG = 'True'
+  directory "#{REPODIR}" do
+    recursive true
+  end
+else
+  DEBUG = 'False'
+end
+
+template "/etc/postgresql/#{node['config']['DATABASE']['VERSION']}/main/pg_hba.conf" do
 	source 'pg_hba.conf.erb'
 	user 'postgres'
 	group 'postgres'

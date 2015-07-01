@@ -10,3 +10,4 @@ DATABASE:
   NAME: busineme
   USER: busineme
   PASSWORD: 1234
+  VERSION: 9.3

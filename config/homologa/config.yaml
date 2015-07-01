@@ -4,9 +4,10 @@ DIRECTORIES:
 APPLICATION:
   WEB_REPOSITORY: https://github.com/Busineme/BusinemeWeb.git
   API_REPOSITORY: https://github.com/Busineme/BusinemeAPI.git
-  API_URL: http://busineme@businemeweb.cloudapp.net/api/v1/
+  API_URL: http://businemeweb.cloudapp.net/api/v1/
   SECRET_KEY: secret-key
 DATABASE:
   NAME: busineme
   USER: busineme
   PASSWORD: 1234
+  VERSION: 9.4
