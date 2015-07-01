@@ -80,7 +80,7 @@ end
 template "#{REPODIR}/gunicorn_script" do
   source "gunicorn_script.erb"
   variables({:REPODIR => REPODIR})
-  # mode 0775
+  mode 0775
 end
 
 service 'supervisor' do
