@@ -1,11 +1,10 @@
 DIRECTORIES:
-  API_REPO_LOCAL: /vagrant/repo/busineme-api
-  API_REPO_PROD: /opt/busineme-api
-  WEB_REPO_LOCAL: /vagrant/repo/busineme-web
-  WEB_REPO_PROD: /opt/busineme-web
+  API_REPO: /vagrant/repo/busineme-api
+  WEB_REPO: /vagrant/repo/busineme-web
 APPLICATION:
   WEB_REPOSITORY: https://github.com/Busineme/BusinemeWeb.git
   API_REPOSITORY: https://github.com/Busineme/BusinemeAPI.git
+  API_URL: http://10.10.10.2:8080/api/v1/
   SECRET_KEY: secret-key
 DATABASE:
   NAME: busineme

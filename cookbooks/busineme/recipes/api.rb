@@ -27,8 +27,9 @@ package "nginx"
 
 include_recipe "git"
 
+REPODIR = node['config']['DIRECTORIES']['API_REPO']
+
 if ['local'].include?($BUSINEME_ENV)
-  REPODIR = node['config']['DIRECTORIES']['API_REPO_LOCAL']
   DEBUG = 'True'
   directory "#{REPODIR}" do
     recursive true
