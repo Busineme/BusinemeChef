@@ -1,6 +1,5 @@
 # Variables
 $BUSINEME_ENV = ENV.fetch('BUSINEME_ENV', 'local')
-execute "apt-get update"
 package "vim"
 
 package "python2.7" 
@@ -21,6 +20,11 @@ package "python-lxml"
 package "python-setuptools"
 package "python-Levenshtein"
 package "python-psycopg2"
+execute "pip install gunicorn"
+package "nginx"
+package "supervisor"
+package "nginx"
+
 
 include_recipe "git"
 
@@ -64,5 +68,25 @@ execute 'python manage.py makemigrations' do
 end
 
 execute 'python manage.py migrate' do
+  cwd "#{REPODIR}"
+end
+
+template "/etc/supervisor/conf.d/busineme.conf" do
+  source "busineme.conf.erb"
+  variables({:REPODIR => REPODIR})
+  mode 0600
+end
+
+template "#{REPODIR}/gunicorn_script" do
+  source "gunicorn_script.erb"
+  variables({:REPODIR => REPODIR})
+  # mode 0775
+end
+
+service 'supervisor' do
+  action :restart
+end
+
+execute 'supervisorctl start busineme' do
   cwd "#{REPODIR}"
 end

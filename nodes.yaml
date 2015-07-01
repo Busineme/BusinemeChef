@@ -1,10 +1,11 @@
 api:
   run_list:
     - recipe[basics]
+    - recipe[busineme::api]
     # - recipe[busineme::api]
 
 web:
   run_list:
     - recipe[basics]
-    - recipe[busineme::postgresql]
+    # - recipe[busineme::postgresql]
     - recipe[busineme::web]
