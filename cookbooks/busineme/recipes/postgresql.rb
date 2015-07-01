@@ -1,6 +1,6 @@
 package "postgresql"
 
-template "/etc/postgresql/9.4/main/pg_hba.conf" do
+template "/etc/postgresql/9.3/main/pg_hba.conf" do
 	source 'pg_hba.conf.erb'
 	user 'postgres'
 	group 'postgres'

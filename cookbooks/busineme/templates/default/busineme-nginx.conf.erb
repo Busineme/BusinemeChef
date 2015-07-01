@@ -10,7 +10,7 @@ server {
     error_log /var/log/busineme-error.log;
 
     location /static/ {
-        alias /home/busineme/BusinemeWeb/static/;
+        alias <%=@REPODIR%>/static/;
     }
 
     location / {

@@ -20,6 +20,10 @@ package "python-lxml"
 package "python-setuptools"
 package "python-Levenshtein"
 package "python-psycopg2"
+execute "pip install gunicorn"
+package "nginx"
+package "supervisor"
+package "nginx"
 
 include_recipe "git"
 
@@ -61,3 +65,46 @@ execute 'python manage.py migrate' do
   cwd "#{REPODIR}"
 end
 
+template "/etc/supervisor/conf.d/busineme.conf" do
+  source "busineme.conf.erb"
+  variables({:REPODIR => REPODIR})
+  mode 0600
+end
+
+template "#{REPODIR}/gunicorn_script" do
+  source "gunicorn_script.erb"
+  variables({:REPODIR => REPODIR})
+  mode 0775
+end
+
+service 'supervisor' do
+  action :restart
+end
+
+execute 'supervisorctl start busineme' do
+  cwd "#{REPODIR}"
+end
+
+file "/etc/nginx/sites-available/default" do
+  action :delete
+end
+
+file "/etc/nginx/sites-enabled/default" do
+  action :delete
+end
+
+template "/etc/nginx/sites-available/busineme.conf" do
+  source "busineme-nginx.conf.erb"
+  variables({:REPODIR => REPODIR})
+  mode 0600
+end
+
+link "/etc/nginx/sites-enabled/busineme.conf" do
+  to "/etc/nginx/sites-available/busineme.conf"
+  notifies :restart, "service[nginx]"
+end
+
+service "nginx" do
+  action [:enable, :start]
+  supports :restart => true
+end

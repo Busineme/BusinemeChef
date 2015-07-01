@@ -90,3 +90,27 @@ end
 execute 'supervisorctl start busineme' do
   cwd "#{REPODIR}"
 end
+
+file "/etc/nginx/sites-available/default" do
+  action :delete
+end
+
+file "/etc/nginx/sites-enabled/default" do
+  action :delete
+end
+
+template "/etc/nginx/sites-available/busineme.conf" do
+  source "busineme-nginx.conf.erb"
+  variables({:REPODIR => REPODIR})
+  mode 0600
+end
+
+link "/etc/nginx/sites-enabled/busineme.conf" do
+  to "/etc/nginx/sites-available/busineme.conf"
+  notifies :restart, "service[nginx]"
+end
+
+service "nginx" do
+  action [:enable, :start]
+  supports :restart => true
+end
